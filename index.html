@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="White hat and black hat visualizations of New York City civilian complaints against police officers.">
+  <title>Two Views of NYPD Civilian Complaints</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◐</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <nav aria-label="Main navigation">
+      <a class="wordmark" href="#top">CMSC 471 · Assignment 2</a>
+      <div class="nav-links">
+        <a href="#white-hat">White hat</a>
+        <a href="#black-hat">Black hat</a>
+        <a href="#process">Process</a>
+      </div>
+    </nav>
+    <div class="hero-content" id="top">
+      <p class="eyebrow">ONE DATASET · TWO ARGUMENTS</p>
+      <h1>What can a chart make us believe?</h1>
+      <p class="dek">The same 33,358 investigated allegations can support a careful account—or a persuasive distortion. Compare the honest view with the deceptive one below.</p>
+      <a class="scroll-link" href="#white-hat">Begin with the evidence <span aria-hidden="true">↓</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="chapter white-chapter" id="white-hat">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow teal">WHITE HAT · COMPLETE CONTEXT</p>
+          <h2>What happened to investigated allegations?</h2>
+        </div>
+        <p class="section-intro">Outcomes vary sharply by complaint category. This view keeps all three CCRB findings visible and uses a common 0–100% scale.</p>
+      </div>
+
+      <div class="chart-card honest-card">
+        <div class="chart-header">
+          <div>
+            <h3>CCRB findings by allegation category</h3>
+            <p id="white-subtitle">Share of allegations in the full dataset, September 1985–January 2020</p>
+          </div>
+          <label class="filter-label" for="period-select">
+            Time period
+            <select id="period-select">
+              <option value="all">All available years</option>
+              <option value="2000">2000–2019</option>
+              <option value="2010">2010–2019</option>
+              <option value="2015">2015–2019</option>
+            </select>
+          </label>
+        </div>
+        <div class="legend" id="white-legend" aria-label="Outcome legend"></div>
+        <div class="chart-wrap" id="white-chart" role="img" aria-label="One hundred percent stacked bar chart showing CCRB findings by allegation category"></div>
+        <div class="chart-foot">
+          <p id="white-count">Loading data…</p>
+          <p>Hover or focus on a segment for exact counts. Percentages are calculated within each category.</p>
+        </div>
+      </div>
+
+      <article class="writeup">
+        <h3>Why this is a white-hat visualization</h3>
+        <p>This chart asks a bounded question: among the allegations in this dataset, how did CCRB investigators classify each category? The 33,358 rows are grouped by the four FADO categories—Force, Abuse of Authority, Discourtesy, and Offensive Language—and by three outcome groups. Every disposition beginning with “Substantiated” is combined into one group; “Exonerated” and “Unsubstantiated” remain separate. The chart then divides each outcome count by the total number of allegations in its category. The visible time filter repeats that calculation for the selected period, and the annotation below the chart reports the remaining row count.</p>
+        <p>A 100% stacked bar chart supports comparison of outcome composition without letting the much larger Abuse of Authority category dominate the others. Position and length encode percentage on a linear 0–100% scale. A restrained, color-vision-friendly categorical palette distinguishes the outcomes, while direct percentages, a legend, tooltips, and the row-count note make the transformation inspectable. The default view includes the complete date range; any filter is explicit and reversible.</p>
+        <p>The interpretation must stay within the dataset’s limits. These are allegations, not a census of all police encounters or proof that misconduct occurred. ProPublica excluded allegations found unfounded, and the release covers closed cases involving officers who were still active in June 2020 and had at least one substantiated allegation. Those selection rules prevent generalizing the chart to all NYPD officers or all complaints.</p>
+      </article>
+    </section>
+
+    <section class="chapter black-chapter" id="black-hat">
+      <div class="section-heading inverse">
+        <div>
+          <p class="eyebrow gold">BLACK HAT · DESIGNED TO PERSUADE</p>
+          <h2>Now watch the framing change.</h2>
+        </div>
+        <p class="section-intro">The numbers below are real. The conclusion is engineered.</p>
+      </div>
+
+      <div class="chart-card deceptive-card">
+        <div class="chart-header">
+          <div>
+            <p class="publisher">CIVIC PROGRESS REPORT</p>
+            <h3>Independent oversight is steadily strengthening</h3>
+            <p>Share of investigated allegations substantiated at selected benchmark years</p>
+          </div>
+          <span class="status-pill">Positive trend</span>
+        </div>
+        <div class="black-stat">
+          <strong>Nearly 2×</strong>
+          <span>increase in the accountability rate</span>
+        </div>
+        <div class="chart-wrap" id="black-chart" role="img" aria-label="Area chart suggesting a steady rise in the share of allegations substantiated"></div>
+        <p class="source-line">Source: NYC Civilian Complaint Review Board records · ProPublica analysis</p>
+      </div>
+
+      <article class="writeup inverse-copy">
+        <h3>How the black-hat visualization misleads</h3>
+        <p>This chart uses accurate values but assembles them into a misleading story of steady improvement. First, it cherry-picks four years—2008, 2011, 2015, and 2019—from a much noisier annual series. It hides 2016–2018, when the rate fell after the 2015 peak, and omits earlier years whose higher values would weaken the claimed long-term rise. The equal spacing of the four marks also treats unequal time gaps as if they were identical.</p>
+        <p>Second, the vertical scale runs only from 14% to 36%. Because the filled area reaches the bottom of this truncated frame instead of zero, the change looks much larger than the underlying 15.6-to-30.9 percentage-point comparison. A smoothed curve further implies a continuous trajectory even though the intervening years are absent. The large “Nearly 2×” annotation emphasizes a relative ratio; the less dramatic absolute change of 15.3 percentage points is never stated.</p>
+        <p>Finally, the title converts a measurement into a causal value judgment. “Oversight is strengthening” is not established by a higher substantiation share: changes in complaint mix, evidence, investigation practices, or which cases enter this restricted dataset could all affect the rate. The sober blue palette, institutional label, precise point values, and polished source line borrow the visual language of trustworthy reporting. Each choice is individually plausible, which makes their combined framing harder to notice at first glance.</p>
+      </article>
+    </section>
+
+    <section class="chapter methods-chapter" id="process">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow coral">METHODS · SOURCES · PROCESS</p>
+          <h2>How the project was made</h2>
+        </div>
+      </div>
+
+      <div class="methods-grid">
+        <article>
+          <h3>Data and references</h3>
+          <p>The project uses ProPublica’s July 2020 release of records supplied by New York City’s Civilian Complaint Review Board. It contains 33,358 allegation-level rows covering September 1985 through January 2020.</p>
+          <ul>
+            <li><a href="https://projects.propublica.org/datastore/#civilian-complaints-against-new-york-city-police-officers">ProPublica Data Store: dataset, scope, and field glossary</a></li>
+            <li><a href="https://projects.propublica.org/nypd-ccrb/">The NYPD Files: ProPublica’s original interactive</a></li>
+            <li><a href="https://www.propublica.org/article/your-questions-about-the-new-york-city-police-complaint-data-answered">ProPublica: questions and limitations</a></li>
+            <li><a href="https://d3js.org/">D3.js documentation</a></li>
+            <li><a href="https://gist.github.com/reshayganfar/2790442af9f2b6f4948413d621a8e6a5">Public CSV mirror used to verify the original field structure</a></li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>Development process</h3>
+          <p>The work began by reviewing the assignment rubric and course material on marks, channels, scales, color, and interaction. After inspecting the dataset, the team tested several questions and selected outcome composition because it supports both an accurate overview and a subtle manipulation. The visualizations were sketched as stacked bars and a time series, implemented with HTML, CSS, JavaScript, and D3, and checked at desktop and mobile sizes.</p>
+          <p><strong>Team and time:</strong> The team spent approximately 15 hours working on the assignment, divided evenly at around 5 hours per member. We coordinated the work through shared files and online check-ins, with each member contributing to design, implementation, and review.</p>
+          <ul class="contribution-list">
+            <li><strong>Ben Li:</strong> explored the dataset, checked category and outcome groupings, drafted the white-hat design rationale, and reviewed the final visualization for clarity and accuracy.</li>
+            <li><strong>Julio Gabriel Alumbro:</strong> developed the black-hat framing and deceptive design choices, drafted its explanatory write-up, and tested chart interactions and mobile presentation.</li>
+            <li><strong>Matthew Chin:</strong> assembled the webpage and D3 charts, integrated the written sections and citations, and prepared deployment and demo-video materials.</li>
+          </ul>
+          <p>The most time-consuming tasks were validating the grouped outcome calculations, documenting the dataset’s selection limits, and tuning the deceptive chart so that its argument felt credible without becoming an obvious parody.</p>
+        </article>
+
+        <article>
+          <h3>AI usage</h3>
+          <p>OpenAI Codex was used as a development assistant to review the supplied lecture slides, inspect the dataset, draft and revise D3 code, test the webpage, and help document the ethical contrast between the two views. The team directed the assignment goals and is responsible for reviewing the analysis, verifying the final text, recording the demo, and accurately reporting team contributions. AI output was not treated as a data source; claims and calculations were checked against the supplied dataset and ProPublica’s documentation.</p>
+        </article>
+
+        <article>
+          <h3>Visual encoding summary</h3>
+          <dl>
+            <div><dt>White hat marks</dt><dd>Rectangles</dd></div>
+            <div><dt>White hat channels</dt><dd>Length → percentage; y-position → category; hue → outcome</dd></div>
+            <div><dt>Black hat marks</dt><dd>Polyline, points, and filled area</dd></div>
+            <div><dt>Black hat channels</dt><dd>x-position → selected year; y-position → substantiation rate</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>CMSC 471 · Introduction to Information Visualization · Fall 2026</p>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="script.js"></script>
+</body>
+</html>
